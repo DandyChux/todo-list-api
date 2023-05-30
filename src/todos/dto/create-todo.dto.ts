@@ -1,5 +1,5 @@
 export class CreateTodoDto {
   title: string;
   description: string;
-  userId: string;
+  user_id: string;
 }
