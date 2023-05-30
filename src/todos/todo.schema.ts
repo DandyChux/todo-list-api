@@ -14,7 +14,7 @@ export class Todo {
   @Prop({ default: false })
   done: boolean;
 
-  @Prop({ type: Types.ObjectId, ref: 'User', required: true })
+  @Prop({ type: Types.ObjectId, ref: 'User' })
   user_id: Types.ObjectId;
 }
 
