@@ -8,29 +8,39 @@ import {
   Param,
   UseGuards,
   Request,
+  Render,
 } from '@nestjs/common';
 import { Todo } from './todo.schema';
 import { TodosService } from './todos.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
-import { JwtAuthGuard } from '@/auth/jwt-auth.guard';
+import { JwtAuthGuard } from '~/auth/jwt-auth.guard';
 
 @Controller('todos')
 export class TodosController {
   constructor(private readonly todosService: TodosService) {}
 
+  @Get()
+  @Render('todos')
+  async todosPage() {
+    const todos = await this.todosService.findAll();
+    return { todos };
+  }
+
   @UseGuards(JwtAuthGuard)
-  @Post()
+  @Get('/create')
+  @Render('new-todo')
+  async newTodoPage() {
+    return { message: '' };
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('/create')
   async create(
     @Request() req,
     @Body() createTodoDto: CreateTodoDto,
   ): Promise<Todo> {
     return this.todosService.create(req.user.userId, createTodoDto);
-  }
-
-  @Get()
-  async findAll(): Promise<Todo[]> {
-    return this.todosService.findAll();
   }
 
   @Put(':id')

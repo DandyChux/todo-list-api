@@ -1,0 +1,22 @@
+
+<div class="flex flex-col items-center my-4 space-y-4">
+    <form class="mx-auto w-[300px] p-4 border flex flex-col gap-4 rounded-md" action="/auth/login" method="post">
+        <div class="flex flex-col flex-1">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" class="border">
+        </div>
+        {{!-- <div class="flex flex-col flex-1">
+            <label for="email">Email</label>
+            <input type="text" name="email" id="email" class="border">
+        </div> --}}
+        <div class="flex flex-col flex-1">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" class="border">
+        </div>
+        <button type="submit" class="border p-4 rounded hover:bg-green-300">Submit</button> 
+    </form>
+
+    <div>
+        {{ message }}
+    </div>
+</div>

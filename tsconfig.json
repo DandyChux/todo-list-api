@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "module": "commonjs",
+    "moduleResolution": "node",
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
@@ -18,10 +19,8 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@/*": ["src/*"],
-      "@todos/*": ["src/todos/*"],
-      "@users/*": ["src/users/*"],
-      "@auth/*": ["src/auth/*"],
-    }
+      "~/*": ["src/*"]
+    },
+    "typeRoots": ["node_modules/@types", "node_modules/.pnpm/@types"]
   }
 }

@@ -14,6 +14,9 @@ export class Todo {
   @Prop({ default: false })
   done: boolean;
 
+  @Prop({ type: Date })
+  due_date?: Date;
+
   @Prop({ type: Types.ObjectId, ref: 'User' })
   user_id: Types.ObjectId;
 }

@@ -31,4 +31,12 @@ export class TodosService {
   }
 
   // TODO: add additional methods for updating and deleting todos here
+
+  async findUserTodos(user_id: string): Promise<Todo[]> {
+    return this.todoModel.find({ user_id }).exec();
+  }
+
+  async findUserTodoById(user_id: string, id: string): Promise<Todo> {
+    return this.todoModel.findOne({ user_id, _id: id }).exec();
+  }
 }

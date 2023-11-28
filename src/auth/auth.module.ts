@@ -8,6 +8,9 @@ import { UsersModule } from 'src/users/users.module';
 import { LocalStrategy } from './local.strategy';
 import { JwtStrategy } from './jwt.strategy';
 import { HashService } from 'src/users/hash.service';
+import { UsersService } from '~/users/users.service';
+import { MongooseModule } from '@nestjs/mongoose';
+import { User, UserSchema } from '~/users/users.schema';
 
 @Module({
   imports: [
@@ -17,6 +20,7 @@ import { HashService } from 'src/users/hash.service';
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '1h' },
     }),
+    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy, HashService],
   controllers: [AuthController],

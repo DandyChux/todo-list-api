@@ -8,29 +8,27 @@ services:
       target: development
     volumes:
       - .:/usr/src/app
-      - /usr/src/app/node_modules/
+      - node_modules:/usr/src/app/node_modules/
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
       - 9229:9229
-    command: npm run start:debug
+    command: pnpm run start:debug
     env_file:
-      - .env
+      - .env.local
     networks:
       - webnet
     depends_on:
-      - postgres
-  postgres:
-    container_name: postgres
-    image: postgres:12.2-alpine
+      - mongodb
+  mongodb:
+    container_name: mongodb
+    image: mongo:latest
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - mongodata:/data/db
     ports:
-      - 5432:5432
+      - 27017:27017
     environment:
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
-      PG_DATA: /var/lib/postgresql/data
+      MONGO_LOCAL_USERNAME: ${DB_USER}
+      MONGO_LOCAL_PASSWORD: ${DB_PASSWORD}
     networks:
       - webnet
 
@@ -38,4 +36,5 @@ networks:
   webnet:
 
 volumes:
-  pgdata:
+  mongodata:
+  node_modules:
